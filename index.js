@@ -5,35 +5,35 @@
 
 const { createStore } = require("redux");
 
-// CONSTANTS
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const RESET = "RESET";
+//CONSTANTS 
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+const RESET = 'RESET';
 
-
-// CREATE STATE 
 const initialState = {
     count: 0
-}
+};
 
-// CREATE ACTION 
+//CREATE ACTION
 const incrementCounterAction = () => {
     return {
         type: INCREMENT
-    };
-}
+    }
+};
+
 const decrementCounterAction = () => {
     return {
         type: DECREMENT
-    };
-}
+    }
+};
+
 const resetCounterAction = () => {
     return {
         type: RESET
-    };
-}
+    }
+};
 
-// CREATE REDUCTER 
+// CREATE REDUCER 
 const counterReducer = (state = initialState, action) => {
     switch (action.type) {
         case INCREMENT:
@@ -41,15 +41,13 @@ const counterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 count: state.count + 1
-            };
-
+            }
         case DECREMENT:
 
             return {
                 ...state,
                 count: state.count - 1
-            };
-
+            }
         case RESET:
 
             return {
@@ -72,5 +70,5 @@ store.subscribe(() => {
 store.dispatch(incrementCounterAction())
 store.dispatch(incrementCounterAction())
 store.dispatch(incrementCounterAction())
+// store.dispatch(resetCounterAction())
 store.dispatch(decrementCounterAction())
-store.dispatch(resetCounterAction())
