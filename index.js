@@ -99,7 +99,6 @@ store.subscribe(() => {
 
 // store.dispatch(incrementCounterAction())
 // store.dispatch(incrementCounterAction())
-// store.dispatch(incrementCounterAction())
 // store.dispatch(resetCounterAction())
 // store.dispatch(decrementCounterAction())
 // store.dispatch(incrementCounterByValue(5))
