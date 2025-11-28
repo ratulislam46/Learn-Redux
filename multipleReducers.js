@@ -2,12 +2,20 @@ const { createStore } = require("redux");
 
 // CONSTANT 
 const GET_PRODUCTS = "GETPRODUCTS";
-const ADD_PRODUCT = "ADD_PRODUCT"
+const ADD_PRODUCT = "ADD_PRODUCT";
+const GET_ITEMS = 'GET_ITEMS';
+const ADD_ITEM = "ADD_ITEM"
 
 // product reducer 
 const initialProductState = {
     products: ['Sugar', "Salt"],
     NumberOfProducts: 2
+}
+
+// product reducer 
+const initialItemsState = {
+    items: ["Shirt", "Pant", "Watch"],
+    NumberOfItems: 3
 }
 
 const getProduct = () => {
@@ -20,6 +28,19 @@ const addProduct = (product) => {
     return {
         type: ADD_PRODUCT,
         payload: product
+    }
+}
+
+const getItems = () => {
+    return {
+        type: GET_ITEMS
+    }
+}
+
+const addItem = (items) => {
+    return {
+        type: ADD_ITEM,
+        payload: items
     }
 }
 
@@ -38,12 +59,30 @@ const productReducer = (state = initialProductState, action) => {
             }
 
         default:
-            state;
+           return state;
     }
 };
 
 
-// cart reducer 
+// CART REDUCER
+const cartReducer = (state = initialItemsState, action) => {
+    switch (action.type) {
+        case GET_ITEMS:
+            return {
+                ...state
+            }
+
+        case ADD_ITEM:
+            return {
+                ...state,
+                items: [...state.items, action.payload],
+                NumberOfItems: state.NumberOfItems + 1,
+            }
+
+        default:
+            return state;
+    }
+}
 
 // STORE 
 const store = createStore(productReducer)
@@ -51,6 +90,13 @@ store.subscribe(() => {
     console.log(store.getState());
 })
 
+const cartStore = createStore(cartReducer);
+cartStore.subscribe(() => {
+    console.log(cartStore.getState())
+})
 
-store.dispatch(getProduct())
-store.dispatch(addProduct("Banana")) 
+// store.dispatch(getProduct())
+// store.dispatch(addProduct("Banana"))
+
+cartStore.dispatch(getItems())
+cartStore.dispatch(addItem("Cap", "Jacket"));
